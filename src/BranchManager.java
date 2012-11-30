@@ -16,8 +16,7 @@ public class BranchManager{
       System.out.println("|        6. Edit a store                                  |");
       System.out.println("|        7. Exit                                          |");
       System.out.println("===========================================================");
-      System.out.println(" Please Select an option:                                  ");
-      swValue=StdIn.readInt();    
+      swValue=BooksAThousand.getIntFromShell("Please Select an option: ");
       // Switch construct
       switch (swValue) {
         case 1:

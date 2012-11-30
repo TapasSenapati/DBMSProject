@@ -26,10 +26,8 @@ public class SalesPerson {
 					.println("|        6. Exit                                          |");
 			System.out
 					.println("===========================================================");
-			System.out
-					.println(" Please Select an option:                                  ");
-			swValue = StdIn.readInt();
-
+			swValue=BooksAThousand.getIntFromShell("Please Select an option: ");
+			
 			// Switch construct
 			switch (swValue) {
 			case 1:

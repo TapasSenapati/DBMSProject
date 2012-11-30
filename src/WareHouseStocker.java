@@ -17,8 +17,7 @@ public class WareHouseStocker{
       System.out.println("|        7. Fulfill a store order                         |");
       System.out.println("|        8. Exit                                          |");
       System.out.println("===========================================================");
-      System.out.println(" Please Select an option:                                  ");
-      swValue=StdIn.readInt();    
+      swValue=BooksAThousand.getIntFromShell("Please Select an option: ");
       // Switch construct
       switch (swValue) {
         case 1:
