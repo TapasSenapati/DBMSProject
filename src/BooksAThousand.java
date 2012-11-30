@@ -63,12 +63,13 @@ public class BooksAThousand
 
       public static void main(String args[])
       {
+    	  
     	  String menu_string = "Enter 1 to act as sales person.\n"
     	  					 + "Enter 2 to act as billing staff.\n"
     	  					 + "Enter 3 to act as warehoue stocker.\n"
     	  					 + "Enter 4 to act as branch manager.\n"
     	  					 + "Enter 5 to act as chain manager.\n"
-    	  					 + "Enter 0 to exit from the program.\n";
+    	  					 + "Enter 6 to exit from the program.\n";
     	  int menu_choice = 0;
     	  
     	  do
@@ -76,17 +77,21 @@ public class BooksAThousand
               menu_choice  = BooksAThousand.getIntFromShell(menu_string);
               switch(menu_choice)
               {
-              	case 1: //fun1(menu_choice);
+              	case 1: SalesPerson.main(args);
               			break;
-              	case 2: //fun2(menu_choice);
+              	case 2: BillingStaff.main(args);
   						break;
-              	case 3: //fun3(menu_choice);
+              	case 3: WareHouseStocker.main(args);
       					break;
-              	case 0: System.out.println("Now exiting.");
+              	case 4: BranchManager.main(args);
+              			break;
+              	case 5: ChainManager.main(args);
+              			break;
+              	case 6: System.out.println("Now exiting.");
               			break;
       			default:	System.out.println("Please enter a valid value");
               }
-    	  }	while(menu_choice != 0);
+    	  }	while(menu_choice != 6);
       }
 
 }

@@ -1,4 +1,3 @@
-import java.util.*;
 public class WareHouseStocker{
   public static void main(String[] args){
     int swValue;
