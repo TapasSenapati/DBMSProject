@@ -85,7 +85,7 @@ public class BooksAThousand {
 				menu_choice = BooksAThousand.getIntFromShell(menu_string);
 				switch (menu_choice) {
 				case 1:
-					SalesPerson.main(args);
+					SalesPerson.showMenu(connection);
 					break;
 				case 2:
 					BillingStaff.main(args);
