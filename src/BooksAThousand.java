@@ -58,8 +58,8 @@ public class BooksAThousand {
 	public static void main(String args[]) {
 
 		String jdbcURL = "jdbc:oracle:thin:@ora.csc.ncsu.edu:1521:orcl";
-		String user = ""; // user id
-		String password = ""; // password
+		String user = "orsevin"; // user id
+		String password = "000751169"; // password
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
