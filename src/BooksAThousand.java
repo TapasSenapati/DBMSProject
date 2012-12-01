@@ -91,7 +91,7 @@ public class BooksAThousand {
 					BillingStaff.main(args);
 					break;
 				case 3:
-					WareHouseStocker.main(args);
+					WareHouseStocker.showMenu(connection);
 					break;
 				case 4:
 					BranchManager.main(args);
