@@ -1,5 +1,10 @@
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
 public class BranchManager{
-  public static void main(String[] args){
+  public static int showMenu(Connection conn){
     int swValue;
     
     do{
@@ -20,29 +25,137 @@ public class BranchManager{
       // Switch construct
       switch (swValue) {
         case 1:
-          System.out.println("Option 1 selected");
+          requestStock(conn);
           break;
         case 2:
-          System.out.println("Option 2 selected");
+          addStaff(conn);
           break;
         case 3:
-          System.out.println("Option 3");
+          editStaff(conn);
           break;
         case 4:
-          System.out.println("Option 4");
+          //purchaseHistory(conn);
           break;
         case 5:
-          System.out.println("Option 5");
+          //customersAssisted(conn);
           break;
         case 6:
-          System.out.println("Option 6");
+          //editSore(conn);
           break;
         case 7:
-          System.out.println("Option 7");
+          System.out.println("Exiting Branch Manager menu....");
           break;
         default:
           System.out.println("Invalid selection");
       }
     }while(swValue!=7);
+    return 0;
+  }
+  private static void requestStock(Connection conn)
+  {
+    System.out.println("");
+    
+    int store_id = BooksAThousand.getIntFromShell("Please enter the store id: ");
+    String isbn = BooksAThousand.getStringFromShell("Please input ISBN no: ");
+    int qty = BooksAThousand.getIntFromShell("Please input the quantity: ");
+    float price = BooksAThousand.getFloatFromShell("Please input the price of Stock: ");
+    String store_order_date = BooksAThousand.getStringFromShell("Please input store order date: ");
+    String is_fulfilled = BooksAThousand.getStringFromShell("Please input if order fulfilled or not (Y/N): ");
+    
+    try{
+      Statement statement = conn.createStatement();
+      //insert into store_order values(3, '978-1570762604', 4, 200, to_date('2012-08-03','yyyy-mm-dd'),  'Y');
+      statement.executeUpdate("insert into store_order values(" + store_id + "," + "'" + isbn + "'" + "," + qty + "," + price + "," + "'" + store_order_date + "'" + "," + "'" + is_fulfilled + "'");
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
+  }
+  
+  private static void addStaff(Connection conn)
+  {
+    System.out.println("");
+    
+    int ID = BooksAThousand.getIntFromShell("Please enter staff id: ");
+    String name = BooksAThousand.getStringFromShell("Please enter staff name: ");
+    int age = BooksAThousand.getIntFromShell("Please enter staff age: ");
+    String gender = BooksAThousand.getStringFromShell("Please enter staff gender(M or F): ");
+    float salary = BooksAThousand.getFloatFromShell("Please enter satff salary: ");
+    String job_title = BooksAThousand.getStringFromShell("Please enter staff title: ");
+    int store_id = BooksAThousand.getIntFromShell("Please enter store id: ");
+    String phone = BooksAThousand.getStringFromShell("Please enter staff phone number: ");
+    String address = BooksAThousand.getStringFromShell("Please enter  staff address: ");
+    String is_active = BooksAThousand.getStringFromShell("Please enter whether active(Y/N): ");
+    try{
+      Statement statement = conn.createStatement();
+      statement.executeUpdate("insert into staff values(" + ID + "," + "'" + name + "'" + "," + age + "," + "," + "'" + gender + "'"+ salary + "," + "'" + job_title + "'" + store_id + "'" + "," + "'" + phone + "'" + "," + "'" + address + "'" + "," + "'" + is_active + "'");
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
+  }
+  
+  private static void editStaff(Connection conn)
+  {
+    System.out.println("");
+    int s_id = BooksAThousand.getIntFromShell("Please enter staff id: ");
+    int field_num = BooksAThousand.getIntFromShell("Enter the field number to be edited: e.g 1 for staff name, 2 for staff age, 3 for gender, 4 for salary, 5 for job title, 6 for store id, 7 for phone,8 for address,9 for is active");
+    String s_field = null;
+    switch (field_num) {
+      case 1: s_field = "name";
+      break;
+      case 2: s_field = "age";
+      break;
+      case 3: s_field = "gender";
+      break;
+      case 4: s_field = "salary";
+      break;
+      case 5: s_field = "job_title";
+      break;
+      case 6: s_field = "store_id";
+      break;
+      case 7: s_field = "phone";
+      break;
+      case 8: s_field = "address";
+      break;
+      case 9: s_field = "is_active";
+      break;
+      default: System.out.println("Illegal value");
+      break;
+    }
+    
+    if((field_num == 1) || (field_num == 3) || (field_num == 5) || (field_num == 7) || (field_num == 8) || (field_num == 9)){
+      String s_edit = BooksAThousand.getStringFromShell("Please enter the new value: ");
+      try {
+        Statement statement = conn.createStatement();
+        statement.executeUpdate("update staff set " + s_field + " = " +  "'" + s_edit + "'" + "where staff_id = " + s_id);
+      }
+      catch (Throwable e) { 
+        e.printStackTrace();
+      }
+    }
+    else if( field_num == 2 || field_num == 6)
+    {
+      int s_edit = BooksAThousand.getIntFromShell("Please enter the new value: ");
+      try {
+        Statement statement = conn.createStatement();
+        statement.executeUpdate("update staff set " + s_field + " = " +  "'" + s_edit + "'" + "where staff_id = " + s_id);
+      }
+      catch (Throwable e) { 
+        e.printStackTrace();
+      }
+    }
+    else 
+    {
+      float s_edit = BooksAThousand.getFloatFromShell("Please enter the new value: ");
+      try {
+        Statement statement = conn.createStatement();
+        statement.executeUpdate("update staff set " + s_field + " = " +  "'" + s_edit + "'" + "where staff_id = " + s_id);
+      }
+      catch (Throwable e) { 
+        e.printStackTrace();
+      }
+    }    
+    
   }
 }

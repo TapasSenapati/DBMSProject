@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ChainManager{
   public static int showMenu(Connection conn) {
-		
+    
     int swValue;
     
     do{
@@ -25,13 +25,13 @@ public class ChainManager{
       // Switch construct
       switch (swValue) {
         case 1:
-          addStore(conn);	
+          addStore(conn); 
           break;
         case 2:
           removeStore(conn);
           break;
         case 3:
-          addMerchandise(conn);	
+          addMerchandise(conn); 
           break;
         case 4:
           removeMerchandise(conn);
@@ -50,66 +50,66 @@ public class ChainManager{
   
   private static void addStore(Connection conn)  
   {
-	  int store_id = BooksAThousand.getIntFromShell("Please enter the store id: ");
-	  String store_address = BooksAThousand.getStringFromShell("Please enter the store address : ");
-	  String store_phone = BooksAThousand.getStringFromShell("Please enter the store phone number : ");
-	  try{
-	    Statement statement = conn.createStatement();
-		statement.executeUpdate("insert into Store values (" + store_id + "," +  "'" + store_address + "'" + "," +  "'" + store_phone + "'" + ")");
-	  }
-	  catch (Throwable e) {	
-	    e.printStackTrace();
-	  }
+    int store_id = BooksAThousand.getIntFromShell("Please enter the store id: ");
+    String store_address = BooksAThousand.getStringFromShell("Please enter the store address : ");
+    String store_phone = BooksAThousand.getStringFromShell("Please enter the store phone number : ");
+    try{
+      Statement statement = conn.createStatement();
+      statement.executeUpdate("insert into Store values (" + store_id + "," +  "'" + store_address + "'" + "," +  "'" + store_phone + "'" + ")");
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
   }
   
   private static void removeStore(Connection conn)
   {
-	  int store_id = BooksAThousand.getIntFromShell("Please enter the store id to be removed : ");
-	  
-	  try{
-	    Statement statement = conn.createStatement();
-	    statement.executeUpdate("delete from Store where store_id = " + store_id);
-	  }
-	  catch (Throwable e) {	
-	    e.printStackTrace();
-	  }
+    int store_id = BooksAThousand.getIntFromShell("Please enter the store id to be removed : ");
+    
+    try{
+      Statement statement = conn.createStatement();
+      statement.executeUpdate("delete from Store where store_id = " + store_id);
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
   }
   private static void addMerchandise(Connection conn)
-  {	  
-	  String isbn = BooksAThousand.getStringFromShell("Please enter the isbn : ");
-	  int vendor_id = BooksAThousand.getIntFromShell("Please enter the vendor id : ");
-	  float vendor_price = BooksAThousand.getFloatFromShell("Please enter the vendor price : ");
-	  float retail_price = BooksAThousand.getFloatFromShell("Please enter the retail price : ");
-	  
-	  try{
-	    Statement statement = conn.createStatement();
-		statement.executeUpdate("insert into Merchandise values ('" + isbn + "'" + "," + vendor_id + "," + vendor_price + "," + retail_price + ")");
-	  }
-	  catch (Throwable e) {	
-	    e.printStackTrace();
-	  }
+  {   
+    String isbn = BooksAThousand.getStringFromShell("Please enter the isbn : ");
+    int vendor_id = BooksAThousand.getIntFromShell("Please enter the vendor id : ");
+    float vendor_price = BooksAThousand.getFloatFromShell("Please enter the vendor price : ");
+    float retail_price = BooksAThousand.getFloatFromShell("Please enter the retail price : ");
+    
+    try{
+      Statement statement = conn.createStatement();
+      statement.executeUpdate("insert into Merchandise values ('" + isbn + "'" + "," + vendor_id + "," + vendor_price + "," + retail_price + ")");
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
   }
   private static void removeMerchandise(Connection conn)
-  {	  
-	  String isbn = BooksAThousand.getStringFromShell("Please enter the isbn to be removed : ");
-	  try{
-	    Statement statement = conn.createStatement();
-		statement.executeUpdate("delete from Merchandise where ISBN = '" + isbn + "'");
-	  }
-	  catch (Throwable e) {	
-	    e.printStackTrace();
-	  }
+  {   
+    String isbn = BooksAThousand.getStringFromShell("Please enter the isbn to be removed : ");
+    try{
+      Statement statement = conn.createStatement();
+      statement.executeUpdate("delete from Merchandise where ISBN = '" + isbn + "'");
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
   }
   private static void changeRetailPrice(Connection conn)
   {
-	  String isbn = BooksAThousand.getStringFromShell("Please enter the isbn : ");	  
-	  float retail_price = BooksAThousand.getFloatFromShell("Please enter the new retail price : ");
-	  try{
-	    Statement statement = conn.createStatement();
-		statement.executeUpdate("update Merchandise set retail_price = " + retail_price + " where ISBN = '" + isbn + "'");
-	  }
-	  catch (Throwable e) {	
-	    e.printStackTrace();
-	  }
+    String isbn = BooksAThousand.getStringFromShell("Please enter the isbn : ");   
+    float retail_price = BooksAThousand.getFloatFromShell("Please enter the new retail price : ");
+    try{
+      Statement statement = conn.createStatement();
+      statement.executeUpdate("update Merchandise set retail_price = " + retail_price + " where ISBN = '" + isbn + "'");
+    }
+    catch (Throwable e) { 
+      e.printStackTrace();
+    }
   }
 }
