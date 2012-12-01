@@ -35,22 +35,21 @@ public class SalesPerson {
 			// Switch construct
 			switch (swValue) {
 			case 1:
-				System.out.println("Option 1 selected");
-				break;
+			    checkOut(conn);
+			    break;
 			case 2:
-				System.out.println("Option 2 selected");
+			    placeCustomerOrder(conn);
 				break;
 			case 3:
-			    System.out.println("Option 3");
+			    addCustomer(conn);
 				break;
 			case 4:
-				System.out.println("Option 4");
+			    editCustomer(conn);
 				break;
 			case 5:
-			    CheckCustomerExistance(conn);
+			    CheckCustomerExistence(conn);
 				break;
 			case 6:
-				System.out.println("Option 6");
 				break;
 			default:
 				System.out.println("Invalid selection");
@@ -59,7 +58,95 @@ public class SalesPerson {
 		return 0;
 	}
     
-    private static void CheckCustomerExistance(Connection conn)
+    private static void checkOut(Connection conn)
+    {
+	System.out.println("");
+	Scanner input = new Scanner(System.in);
+
+	try{
+	    input = new Scanner(System.in);
+	    String name = input.nextLine();
+	    Statement statement = conn.createStatement();
+	    ResultSet rs = statement.executeQuery("select * from customer where name='" + name + "'");
+	    if (rs.next()){	      
+		do {
+		}while(rs.next() );
+		
+	    }
+	    else 
+		System.out.println("This customer is not in our database");
+	} catch (Throwable e) {	
+	    e.printStackTrace();
+	}
+    }
+
+    private static void placeCustomerOrder(Connection conn)
+    {
+	System.out.println("");
+	Scanner input = new Scanner(System.in);
+
+	try{
+	    input = new Scanner(System.in);
+	    String name = input.nextLine();
+	    Statement statement = conn.createStatement();
+	    ResultSet rs = statement.executeQuery("");
+	    if (rs.next()){	      
+		do {
+		}while(rs.next() );
+		
+	    }
+	    else 
+		System.out.println("This customer is not in our database");
+	} catch (Throwable e) {	
+	    e.printStackTrace();
+	}
+    }
+
+    private static void addCustomer(Connection conn)
+    {
+	System.out.println("");
+	Scanner input = new Scanner(System.in);
+
+	try{
+	    input = new Scanner(System.in);
+	    String name = input.nextLine();
+	    Statement statement = conn.createStatement();
+	    ResultSet rs = statement.executeQuery("");
+	    if (rs.next()){	      
+		do {
+		}while(rs.next() );
+	    
+	    }
+	    else 
+		System.out.println("This customer is not in our database");
+	} catch (Throwable e) {	
+	    e.printStackTrace();
+	}
+    }
+
+    private static void editCustomer(Connection conn)
+    {
+	System.out.println("");
+	Scanner input = new Scanner(System.in);
+
+	try{
+	    input = new Scanner(System.in);
+	    String name = input.nextLine();
+	    Statement statement = conn.createStatement();
+	    ResultSet rs = statement.executeQuery("select * from customer where name='" + name + "'");
+	    if (rs.next()){	      
+		do {
+		}while(rs.next() );
+		
+	    }
+	    else 
+		System.out.println("This customer is not in our database");
+	} catch (Throwable e) {	
+	    e.printStackTrace();
+	}
+    }
+
+    private static void CheckCustomerExistence(Connection conn)
     {
 	//Check if the Customer exists. If there are name matches,
 	//    show the cashier id/name/phone/address
@@ -70,10 +157,8 @@ public class SalesPerson {
 	    input = new Scanner(System.in);
 	    String name = input.nextLine();
 	    Statement statement = conn.createStatement();
-	    ResultSet rs = statement.executeQuery("select * from customer where name='" + name + "'");
+	    ResultSet rs = statement.executeQuery("");
 	    if (rs.next()){
-	       
-		System.out.printf("%5s%20s%15s%20s\n", "ID", "name", "phone", "address");
 		do {
       		    System.out.printf("%5s%20s%15s%20s\n", rs.getString(1), rs.getString(2), rs.getString(4), rs.getString(3));
 		}while(rs.next() );
@@ -84,5 +169,6 @@ public class SalesPerson {
 	} catch (Throwable e) {	
 	    e.printStackTrace();
 	}
-    }
+    } 
+
 }
