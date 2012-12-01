@@ -4,6 +4,24 @@ import java.sql.*;
 
 public class BooksAThousand {
   // get String or simply enter from shell
+
+
+ public static int nextID(String table, Connection conn){
+	try{
+	    Statement statement = conn.createStatement();
+	    String query = String.format("select max(%s_id) from %s", table, table);
+	    ResultSet rs = statement.executeQuery(query);			  
+	    if(rs.next()) 
+		return rs.getInt(1)+1;
+	    else
+		return 1;
+	}
+	catch (Throwable e){
+	    e.printStackTrace();
+	}
+	return 1;
+    }
+
   public static String getStringFromShell(String prompt) {
     try {
       System.out.print(prompt);
