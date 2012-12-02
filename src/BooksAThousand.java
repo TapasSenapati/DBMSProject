@@ -107,7 +107,7 @@ public class BooksAThousand {
             SalesPerson.showMenu(connection);
             break;
           case 2:
-            BillingStaff.main(args);
+            BillingStaff.showMenu(connection);
             break;
           case 3:
             WareHouseStocker.showMenu(connection);
