@@ -7,6 +7,7 @@ public class WareHouseStocker {
 		int swValue;
 
 		do {
+			System.out.println("You are logged in as a warehouse stock member");
 			// Display menu graphics
 			System.out
 					.println("===========================================================");
@@ -33,7 +34,7 @@ public class WareHouseStocker {
 			System.out
 					.println("|        8. Fulfill a store order                         |");
 			System.out
-					.println("|        9. Exit                                          |");
+					.println("|        9. Change user                                   |");
 			System.out
 					.println("===========================================================");
 			swValue = BooksAThousand
@@ -100,7 +101,9 @@ public class WareHouseStocker {
 			Statement statement1 = conn.createStatement(); // to update the order table
 			Statement statement2 = conn.createStatement(); // to update stock of the  warehouse
 			Statement statement3 = conn.createStatement(); // to update stock of the store
-			System.out.println("Store order table has not been updated yet");
+			
+			// step 1 - updating the order table
+			
 			statement1.executeUpdate("update store_order set is_fulfilled = 'Y' where store_id = " + c_id + " and store_order_date = " + "'" + c_date + "'");
 			System.out.println("Store order table has been updated");
 			ResultSet rs = statement2.executeQuery("select * from stock where store_id = "
@@ -109,9 +112,15 @@ public class WareHouseStocker {
 				statement2.executeUpdate("insert into stock values (" + m_id
 						+ "," + c_id + "," + "0" + ")");
 			}
+			
+			// step 2 - updating the stock table for warehouse
+			
 			statement2.executeUpdate("update stock set quantity = quantity - "
 					+ c_quantity + " where store_id = 2 and ISBN = " + m_id);
 			System.out.println("Stock table has been updated for warehouse");
+			
+			// step 3 - updating the stock table for the store
+			
 			statement3.executeUpdate("update stock set quantity = quantity + "
 					+ c_quantity + " where store_id = " + c_id + " and ISBN = "
 					+ m_id);
@@ -164,6 +173,8 @@ public class WareHouseStocker {
 			Statement statement1 = conn.createStatement(); // to update the order table
 			Statement statement2 = conn.createStatement(); // to update the stock of the warehouse
 
+			// step 1 - updating the order table
+			
 			statement1
 					.executeUpdate("update customer_order set is_fulfilled = 'Y' where customer_id = "
 							+ c_id
@@ -171,6 +182,9 @@ public class WareHouseStocker {
 							+ "'"
 							+ c_date + "'" + " and ISBN = " + m_id);
 			System.out.println("Customer order table has been updated");
+			
+			// step 2 - updating the stock table
+			
 			statement2.executeUpdate("update stock set quantity = quantity - "
 					+ c_quantity + " where store_id = 2 and ISBN = " + m_id);
 			System.out.println("Stock table has been updated");
