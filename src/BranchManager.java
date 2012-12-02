@@ -65,7 +65,9 @@ public class BranchManager{
     try{
       Statement statement = conn.createStatement();
       //insert into store_order values(3, '978-1570762604', 4, 200, to_date('2012-08-03','yyyy-mm-dd'),  'Y');
-      statement.executeUpdate("insert into store_order values(" + store_id + "," + "'" + isbn + "'" + "," + qty + "," + price + "," + "'" + store_order_date + "'" + "," + "'" + is_fulfilled + "'");
+      String query="insert into store_order values(" + store_id + "," + "'" + isbn + "'" + "," + qty + "," + price + "," + "'" + store_order_date + "'" + "," + "'" + is_fulfilled + "')";
+      System.out.println(query);
+      statement.executeUpdate(query);
     }
     catch (Throwable e) { 
       e.printStackTrace();
@@ -88,7 +90,9 @@ public class BranchManager{
     String is_active = BooksAThousand.getStringFromShell("Please enter whether active(Y/N): ");
     try{
       Statement statement = conn.createStatement();
-      statement.executeUpdate("insert into staff values(" + ID + "," + "'" + name + "'" + "," + age + "," + "," + "'" + gender + "'"+ salary + "," + "'" + job_title + "'" + store_id + "'" + "," + "'" + phone + "'" + "," + "'" + address + "'" + "," + "'" + is_active + "'");
+      String query="insert into staff values(" + ID + "," + "'" + name + "'" + "," + age + "," + "'" + gender + "'"+ "," + salary + "," + "'" + job_title + "'" + "," + store_id + "," + "'" + phone + "'" + "," + "'" + address + "'" + "," + "'" + is_active + "')";
+      System.out.println(query);
+      statement.executeUpdate(query);
     }
     catch (Throwable e) { 
       e.printStackTrace();
