@@ -53,13 +53,16 @@ public class ChainManager{
   {
 	  // Input from user all the Store table fields
 	  int store_id = BooksAThousand.getIntFromShell("Please enter the store id: ");
+	  String store_name = BooksAThousand.getStringFromShell("Please enter the store name : ");
 	  String store_address = BooksAThousand.getStringFromShell("Please enter the store address : ");
 	  String store_phone = BooksAThousand.getStringFromShell("Please enter the store phone number : ");
 	  
 	  // Insert a new store in the table
 	  try{
 	    Statement statement = conn.createStatement();
-		statement.executeUpdate("insert into Store values (" + store_id + "," +  "'" + store_address + "'" + "," +  "'" + store_phone + "'" + ")");
+		statement.executeUpdate("insert into Store values (" + store_id + "," +  "'" + store_name + "'" + ","
+			+  "'" + store_address + "'" + "," +  "'" + store_phone + "'" + ")");
+		System.out.println("Store added successfully");
 	  }
 	  catch (Throwable e) {	
 	    e.printStackTrace();
@@ -75,6 +78,7 @@ public class ChainManager{
 	  try{
 	    Statement statement = conn.createStatement();
 	    statement.executeUpdate("delete from Store where store_id = " + store_id);
+	    System.out.println("Store deleted successfully");
 	  }
 	  catch (Throwable e) {	
 	    e.printStackTrace();
@@ -87,11 +91,14 @@ public class ChainManager{
 	  int vendor_id = BooksAThousand.getIntFromShell("Please enter the vendor id : ");
 	  float vendor_price = BooksAThousand.getFloatFromShell("Please enter the vendor price : ");
 	  float retail_price = BooksAThousand.getFloatFromShell("Please enter the retail price : ");
-	  
+	  String title = BooksAThousand.getStringFromShell("Please enter the title : ");
+	  String author = BooksAThousand.getStringFromShell("Please enter the author name : ");
 	  // Insert new merchandise in the table
 	  try{
 	    Statement statement = conn.createStatement();
-		statement.executeUpdate("insert into Merchandise values ('" + isbn + "'" + "," + vendor_id + "," + vendor_price + "," + retail_price + ")");
+		statement.executeUpdate("insert into Merchandise values ('" + isbn + "'" + "," + vendor_id + "," + vendor_price
+				+ "," + retail_price + "," +  "'" + title + "'" + "," +  "'" + author + "'" + ")");
+		System.out.println("Merchandise added successfully");
 	  }
 	  catch (Throwable e) {	
 	    e.printStackTrace();
@@ -106,6 +113,7 @@ public class ChainManager{
 	  try{
 	    Statement statement = conn.createStatement();
 		statement.executeUpdate("delete from Merchandise where ISBN = '" + isbn + "'");
+		System.out.println("Merchandise deleted successfully");
 	  }
 	  catch (Throwable e) {	
 	    e.printStackTrace();
@@ -121,6 +129,7 @@ public class ChainManager{
 	  try{
 	    Statement statement = conn.createStatement();
 		statement.executeUpdate("update Merchandise set retail_price = " + retail_price + " where ISBN = '" + isbn + "'");
+		System.out.println("Retail price updated successfully");
 	  }
 	  catch (Throwable e) {	
 	    e.printStackTrace();
