@@ -1,7 +1,6 @@
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Scanner;
 
 public class BranchManager{
   public static int showMenu(Connection conn){
@@ -24,25 +23,25 @@ public class BranchManager{
       swValue=BooksAThousand.getIntFromShell("Please Select an option: ");
       // Switch construct
       switch (swValue) {
-        case 1:
+        case 1://request a stock
           requestStock(conn);
           break;
-        case 2:
+        case 2://add a staff
           addStaff(conn);
           break;
-        case 3:
+        case 3://edit a staff
           editStaff(conn);
           break;
-        case 4:
+        case 4://purchase history of customer
           purchaseHistory(conn);
           break;
-        case 5:
+        case 5://check customers history
           customersAssisted(conn);
           break;
-        case 6:
+        case 6://edit store
           editStore(conn);
           break;
-        case 7:
+        case 7://exit
           System.out.println("Exiting Branch Manager menu....");
           break;
         default:
@@ -52,6 +51,7 @@ public class BranchManager{
     return 0;
   }
   private static void requestStock(Connection conn)
+  //we intend to requeststock which is insert into store_order tables
   {
     System.out.println("");
     
@@ -64,7 +64,6 @@ public class BranchManager{
     
     try{
       Statement statement = conn.createStatement();
-      //insert into store_order values(3, '978-1570762604', 4, 200, to_date('2012-08-03','yyyy-mm-dd'),  'Y');
       String query="insert into store_order values(" + store_id + "," + "'" + isbn + "'" + "," + qty + "," + price + "," + "'" + store_order_date + "'" + "," + "'" + is_fulfilled + "')";
       System.out.println(query);
       statement.executeUpdate(query);
@@ -75,6 +74,7 @@ public class BranchManager{
   }
   
   private static void addStaff(Connection conn)
+  //we intend to add staff which is insert into staff table
   {
     System.out.println("");
     
@@ -100,6 +100,7 @@ public class BranchManager{
   }
   
   private static void editStaff(Connection conn)
+  //we intend to edit a staff which in staff table
   {
     System.out.println("");
     int s_id = BooksAThousand.getIntFromShell("Please enter staff id: ");
@@ -162,6 +163,7 @@ public class BranchManager{
     }    
   }
   private static void purchaseHistory(Connection conn)
+  //we intend to find out the purchase history of a customer between certain dates
   {
     System.out.println("");
     
@@ -184,12 +186,12 @@ public class BranchManager{
         
       } else
         System.out.println("Sorry.No purchase history found.");
-      String user_continue = BooksAThousand.getStringFromShell("Please press enter to continue: ");
     } catch (Throwable e) {
       e.printStackTrace();
     }
   }
    private static void customersAssisted(Connection conn)
+   //we intend to find out the customers assisted by a staff
   {
     System.out.println("");
     
@@ -212,12 +214,12 @@ public class BranchManager{
         
       } else
         System.out.println("Sorry.No customers assisted in the period.");
-      String user_continue = BooksAThousand.getStringFromShell("Please press enter to continue: ");
     } catch (Throwable e) {
       e.printStackTrace();
     }
   }
   private static void editStore(Connection conn)
+  // we intend to edit a store
   {
     System.out.println("");
     int s_id = BooksAThousand.getIntFromShell("Please enter store id: ");
